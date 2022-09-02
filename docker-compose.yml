@@ -28,7 +28,7 @@ services:
         source: ./services/customer-service
         target: /app
     ports:
-      - ${PORT}:${PORT}
+      - 7150:7150
     depends_on:
       - customer_service_migration
 
