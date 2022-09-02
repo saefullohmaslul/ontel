@@ -1,0 +1,20 @@
+{
+  "go.lintTool": "golint",
+  "go.lintFlags": [
+    "--exclude=\"\bexported \\w+ (\\S*['.]*)([a-zA-Z'.*]*) should have comment or be unexported\b\"",
+  ],
+  "go.formatTool": "goimports",
+  "go.testOnSave": true,
+  "go.lintOnSave": "package",
+  "go.testFlags": [
+    "-v"
+  ],
+  "go.useLanguageServer": true,
+  "go.autocompleteUnimportedPackages": true,
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": true
+    }
+  }
+}
