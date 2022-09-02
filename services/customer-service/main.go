@@ -7,6 +7,8 @@ import (
 
 	"github.com/joho/godotenv"
 	"github.com/saefullohmaslul/distributed-tracing/internal/adapters/postgres"
+	httphandler "github.com/saefullohmaslul/distributed-tracing/internal/handlers/http"
+	"github.com/saefullohmaslul/distributed-tracing/internal/usecases"
 	"github.com/saefullohmaslul/distributed-tracing/pkg"
 	"go.uber.org/fx"
 )
@@ -20,6 +22,8 @@ func main() {
 var Module = fx.Options(
 	pkg.Module,
 	postgres.Module,
+	httphandler.Module,
+	usecases.Module,
 	fx.Invoke(bootstrap),
 )
 
@@ -27,6 +31,7 @@ func bootstrap(
 	lifecycle fx.Lifecycle,
 	echoServer *pkg.EchoServer,
 	postgresDatabase *postgres.Database,
+	routes httphandler.Route,
 ) {
 	conn, _ := postgresDatabase.DB.DB()
 	lifecycle.Append(
@@ -38,6 +43,8 @@ func bootstrap(
 					if !found {
 						port = "7150"
 					}
+
+					routes.Setup()
 
 					echoServer.Echo.Logger.Fatal(
 						echoServer.Echo.Start(fmt.Sprintf(":%s", port)),

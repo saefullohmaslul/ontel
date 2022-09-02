@@ -16,6 +16,7 @@ import (
 // Module postgres
 var Module = fx.Options(
 	fx.Provide(NewClient),
+	fx.Provide(NewCustomerPostgres),
 )
 
 // Database postgres database
