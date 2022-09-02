@@ -1,0 +1,15 @@
+version: '3.0'
+
+services: 
+  postgres:
+    build:
+      context: .
+      dockerfile: docker/postgres/Dockerfile
+    environment: 
+      - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    ports:
+      - ${POSTGRES_DEV_PORT}:5432
+    volumes:
+      - ./docker/postgres:/docker-entrypoint-initdb.d
