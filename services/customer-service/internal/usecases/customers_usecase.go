@@ -5,9 +5,9 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/saefullohmaslul/distributed-tracing/internal/adapters/postgres"
-	"github.com/saefullohmaslul/distributed-tracing/internal/models"
-	"github.com/saefullohmaslul/distributed-tracing/pkg"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/adapters/postgres"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/models"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/pkg"
 )
 
 type CustomerUsecase interface {

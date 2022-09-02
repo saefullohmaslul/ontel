@@ -1,7 +1,7 @@
 package httphandler
 
 import (
-	"github.com/saefullohmaslul/distributed-tracing/pkg"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/pkg"
 	"go.uber.org/fx"
 )
 

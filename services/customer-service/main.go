@@ -6,10 +6,10 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/saefullohmaslul/distributed-tracing/internal/adapters/postgres"
-	httphandler "github.com/saefullohmaslul/distributed-tracing/internal/handlers/http"
-	"github.com/saefullohmaslul/distributed-tracing/internal/usecases"
-	"github.com/saefullohmaslul/distributed-tracing/pkg"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/adapters/postgres"
+	httphandler "github.com/saefullohmaslul/distributed-tracing/customer-service/internal/handlers/http"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/usecases"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/pkg"
 	"go.uber.org/fx"
 )
 

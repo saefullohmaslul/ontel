@@ -3,7 +3,7 @@ package postgres
 import (
 	"context"
 
-	"github.com/saefullohmaslul/distributed-tracing/internal/models"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/models"
 )
 
 type CustomerPostgres interface {

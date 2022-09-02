@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/labstack/echo/v4"
-	"github.com/saefullohmaslul/distributed-tracing/internal/models"
-	"github.com/saefullohmaslul/distributed-tracing/internal/usecases"
-	"github.com/saefullohmaslul/distributed-tracing/pkg"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/models"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/usecases"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/pkg"
 )
 
 type CustomerHttpHandler interface {

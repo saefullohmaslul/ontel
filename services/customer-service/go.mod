@@ -1,4 +1,4 @@
-module github.com/saefullohmaslul/distributed-tracing
+module github.com/saefullohmaslul/distributed-tracing/customer-service
 
 go 1.18
 
