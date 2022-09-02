@@ -3,8 +3,8 @@ version: '3.0'
 services: 
   postgres:
     build:
-      context: .
-      dockerfile: docker/postgres/Dockerfile
+      context: docker/postgres
+      dockerfile: Dockerfile
     environment: 
       - POSTGRES_MULTIPLE_DATABASES=${POSTGRES_MULTIPLE_DATABASES}
       - POSTGRES_USER=${DB_USER}
@@ -13,3 +13,33 @@ services:
       - ${POSTGRES_DEV_PORT}:5432
     volumes:
       - ./docker/postgres:/docker-entrypoint-initdb.d
+  
+  customer_service:
+    build:
+      context: services/customer-service
+      dockerfile: Dockerfile
+      target: dev
+    env_file:
+      - services/customer-service/.env
+    command: sh -c "make start-dev"
+    restart: on-failure
+    volumes:
+      - type: bind
+        source: ./services/customer-service
+        target: /app
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - customer_service_migration
+
+  customer_service_migration:
+    build:
+      dockerfile: Dockerfile
+      context: services/customer-service
+      target: dev
+    command: sh -c "make migrate"
+    depends_on:
+      - postgres
+    restart: on-failure
+    env_file:
+      - services/customer-service/.env
