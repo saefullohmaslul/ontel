@@ -36,7 +36,12 @@ func (h *CustomerHttpHandlerImpl) GetDetailProfile(c echo.Context) error {
 		return c.JSON(response.Code, response)
 	}
 
-	data, err = h.customerUsecase.GetDetailProfile(c.Request().Context(), params)
+	ctx := pkg.NewRequestFromHeader(c.Request().Header, c.Request().Context())
+
+	ctx, span := pkg.NewSpan(ctx, "CustomerHttpHandlerImpl.GetDetailProfile", nil)
+	defer span.End()
+
+	data, err = h.customerUsecase.GetDetailProfile(ctx, params)
 	response = pkg.NewResponse(data, err)
 
 	return c.JSON(response.Code, response)

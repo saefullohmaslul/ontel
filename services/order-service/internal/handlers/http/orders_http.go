@@ -41,7 +41,12 @@ func (h *OrderHttpHandlerImpl) GetOrdersDetail(c echo.Context) error {
 		return c.JSON(response.Code, response)
 	}
 
-	data, err = h.OrderUsecase.GetOrdersDetail(c.Request().Context(), &models.OrdersRequest{
+	ctx := pkg.NewRequestFromHeader(c.Request().Header, c.Request().Context())
+
+	ctx, span := pkg.NewSpan(ctx, "OrderHttpHandlerImpl.GetOrdersDetail", nil)
+	defer span.End()
+
+	data, err = h.OrderUsecase.GetOrdersDetail(ctx, &models.OrdersRequest{
 		CustomerID: params.CustomerID,
 	})
 

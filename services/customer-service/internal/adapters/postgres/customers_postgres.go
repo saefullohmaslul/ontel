@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/models"
+	"github.com/saefullohmaslul/distributed-tracing/customer-service/pkg"
 )
 
 type CustomerPostgres interface {
@@ -21,6 +22,9 @@ func NewCustomerPostgres(db *Database) CustomerPostgres {
 }
 
 func (p *CustomerPostgresImpl) GetCustomer(ctx context.Context, params *models.CustomerRequest) (customer models.Customer, err error) {
+	ctx, span := pkg.NewSpan(ctx, "CustomerPostgresImpl.GetCustomer", nil)
+	defer span.End()
+
 	err = p.db.Table("customers").
 		Select(
 			`

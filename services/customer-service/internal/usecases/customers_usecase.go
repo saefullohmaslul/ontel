@@ -28,6 +28,9 @@ func NewCustomerUsecase(customerPostgres postgres.CustomerPostgres, orderHttp ht
 }
 
 func (u *CustomerUsecaseImpl) GetDetailProfile(ctx context.Context, params *models.DetailProfileRequest) (data models.DetailProfileResponse, err error) {
+	ctx, span := pkg.NewSpan(ctx, "CustomerUsecaseImpl.GetDetailProfile", nil)
+	defer span.End()
+
 	customer, err := u.customerPostgres.GetCustomer(ctx, &models.CustomerRequest{
 		CustomerID: params.CustomerID,
 	})

@@ -13,6 +13,14 @@ services:
       - ${POSTGRES_DEV_PORT}:5432
     volumes:
       - ./docker/postgres:/docker-entrypoint-initdb.d
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    ports:
+      - "14268:14268"   # jaeger-collector HTTP server (tracer provider)
+      - "16686:16686"   # HTTP server (browser UI)
   
   customer_service:
     build:

@@ -46,6 +46,20 @@ func bootstrap(
 
 					routes.Setup()
 
+					prv, err := pkg.NewProvider(pkg.TracerProviderConfig{
+						JaegerEndpoint: os.Getenv("JAEGER_ENDPOINT"),
+						ServiceName:    os.Getenv("SERVICE_NAME"),
+						ServiceVersion: os.Getenv("SERVICE_VERSION"),
+						Environment:    os.Getenv("ENVIRONMENT"),
+						Disabled:       false,
+					})
+
+					if err != nil {
+						return
+					}
+
+					defer prv.Close(ctx)
+
 					echoServer.Echo.Logger.Fatal(
 						echoServer.Echo.Start(fmt.Sprintf(":%s", port)),
 					)

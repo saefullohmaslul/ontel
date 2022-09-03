@@ -25,14 +25,24 @@ func NewOrderHttpClient(client Client) OrderHttpClient {
 }
 
 func (c *OrderHttpClientImpl) GetDetailOrders(ctx context.Context, params *models.OrdersDetailRequest) (data []models.OrdersDetailResponse, err error) {
+	ctx, span := pkg.NewSpan(ctx, "OrderHttpClientImpl.GetDetailOrders", nil)
+	defer span.End()
+
 	var response pkg.Response
 
 	uri := fmt.Sprintf("%s/v1/orders/%d", os.Getenv("ORDER_API"), params.CustomerID)
+
+	pkg.AddSpanEvents(span, "HttpRequest", map[string]string{
+		"origin": os.Getenv("SERVICE_NAME"),
+		"target": "order-service",
+		"uri":    uri,
+	})
 
 	resp, err := c.client.
 		Log(true).
 		R().
 		SetHeader("Content-Type", "application/json").
+		SetHeader("request-id", ctx.Value("request-id").(string)).
 		SetResult(&response).
 		SetError(&response).
 		SetContext(ctx).

@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/saefullohmaslul/distributed-tracing/order-service/internal/models"
+	"github.com/saefullohmaslul/distributed-tracing/order-service/pkg"
 )
 
 type OrderPostgres interface {
@@ -22,6 +23,9 @@ func NewOrderPostgres(db *Database) OrderPostgres {
 }
 
 func (p *OrderPostgresImpl) GetOrders(ctx context.Context, params *models.OrdersRequest) (orders []models.Order, err error) {
+	ctx, span := pkg.NewSpan(ctx, "OrderPostgresImpl.GetOrders", nil)
+	defer span.End()
+
 	err = p.db.Table("orders").
 		Select(
 			`
@@ -42,6 +46,9 @@ func (p *OrderPostgresImpl) GetOrders(ctx context.Context, params *models.Orders
 }
 
 func (p *OrderPostgresImpl) GetOrderItems(ctx context.Context, params *models.OrderItemsRequest) (orderItems []models.OrderItem, err error) {
+	ctx, span := pkg.NewSpan(ctx, "OrderPostgresImpl.GetOrderItems", nil)
+	defer span.End()
+
 	err = p.db.Table("order_items").
 		Select(
 			`
