@@ -1,3 +1,6 @@
 go 1.18
 
-use ./services/customer-service/
+use (
+    ./services/customer-service/
+    ./services/order-service/
+)

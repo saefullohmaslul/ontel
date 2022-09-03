@@ -43,3 +43,33 @@ services:
     restart: on-failure
     env_file:
       - services/customer-service/.env
+
+  order_service:
+    build:
+      context: services/order-service
+      dockerfile: Dockerfile
+      target: dev
+    env_file:
+      - services/order-service/.env
+    command: sh -c "make start-dev"
+    restart: on-failure
+    volumes:
+      - type: bind
+        source: ./services/order-service
+        target: /app
+    ports:
+      - 7151:7151
+    depends_on:
+      - order_service_migration
+
+  order_service_migration:
+    build:
+      dockerfile: Dockerfile
+      context: services/order-service
+      target: dev
+    command: sh -c "make migrate"
+    depends_on:
+      - postgres
+    restart: on-failure
+    env_file:
+      - services/order-service/.env
