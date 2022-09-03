@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
+	httpclient "github.com/saefullohmaslul/distributed-tracing/customer-service/internal/adapters/http"
 	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/adapters/postgres"
 	httphandler "github.com/saefullohmaslul/distributed-tracing/customer-service/internal/handlers/http"
 	"github.com/saefullohmaslul/distributed-tracing/customer-service/internal/usecases"
@@ -24,6 +25,7 @@ var Module = fx.Options(
 	postgres.Module,
 	httphandler.Module,
 	usecases.Module,
+	httpclient.Module,
 	fx.Invoke(bootstrap),
 )
 

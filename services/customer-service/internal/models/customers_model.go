@@ -1,20 +1,21 @@
 package models
 
 type DetailProfileRequest struct {
-	CustomerID int `json:"customer_id" param:"customer_id"`
+	CustomerID int64 `json:"customer_id" param:"customer_id"`
 }
 
 type DetailProfileResponse struct {
-	CustomerID int `json:"customer_id"`
+	Customer
+	Orders []OrdersDetailResponse `json:"orders"`
 }
 
 type CustomerRequest struct {
-	CustomerID int
+	CustomerID int64
 }
 
 type Customer struct {
-	CustomerID int
-	Name       string
-	Email      string
-	Status     int
+	CustomerID int64  `json:"customer_id"`
+	Name       string `json:"name"`
+	Email      string `json:"email"`
+	Status     int    `json:"status"`
 }

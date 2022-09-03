@@ -1,7 +1,7 @@
 package models
 
-type OrdersRequest struct {
-	CustomerID int64
+type OrdersDetailRequest struct {
+	CustomerID int64 `json:"customer_id" param:"customer_id"`
 }
 
 type Order struct {
@@ -14,10 +14,6 @@ type Order struct {
 	UpdatedAt  string  `json:"updated_at"`
 }
 
-type OrderItemsRequest struct {
-	OrderID int64
-}
-
 type OrderItem struct {
 	OrderItemID int64   `json:"order_item_id"`
 	OrderID     int64   `json:"order_id"`
@@ -26,10 +22,6 @@ type OrderItem struct {
 	Amount      float64 `json:"amount"`
 	CreatedAt   string  `json:"created_at"`
 	UpdatedAt   string  `json:"updated_at"`
-}
-
-type OrdersDetailRequest struct {
-	CustomerID int64 `json:"customer_id" param:"customer_id"`
 }
 
 type OrdersDetailResponse struct {

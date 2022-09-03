@@ -3,6 +3,7 @@ module github.com/saefullohmaslul/distributed-tracing/customer-service
 go 1.18
 
 require (
+	github.com/go-resty/resty/v2 v2.7.0
 	github.com/joho/godotenv v1.4.0
 	github.com/labstack/echo/v4 v4.8.0
 	go.uber.org/fx v1.18.1
@@ -32,7 +33,7 @@ require (
 	go.uber.org/multierr v1.5.0 // indirect
 	go.uber.org/zap v1.16.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
-	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f // indirect
+	golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
 	golang.org/x/text v0.3.7 // indirect
 )
